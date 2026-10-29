@@ -1,0 +1,13 @@
+{
+  "info": {"name":"CRM Lead Management API","description":"Manual API test collection. Copy the JWT returned by register/login into the token variable and set enquiryId before claiming.","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable":[{"key":"baseUrl","value":"http://localhost:5000"},{"key":"token","value":""},{"key":"enquiryId","value":""}],
+  "item":[
+    {"name":"Health","request":{"method":"GET","url":"{{baseUrl}}/api/health"}},
+    {"name":"Register employee","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"name\": \"Asha Kumar\",\n  \"email\": \"asha@example.com\",\n  \"password\": \"StrongPass123!\"\n}"},"url":"{{baseUrl}}/api/auth/register"}},
+    {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"email\": \"asha@example.com\",\n  \"password\": \"StrongPass123!\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"Submit public enquiry","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@example.com\",\n  \"courseInterest\": \"Full Stack Development\",\n  \"phone\": \"9876543210\",\n  \"message\": \"Please share batch details.\"\n}"},"url":"{{baseUrl}}/api/enquiries"}},
+    {"name":"Get unclaimed enquiries","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/enquiries/unclaimed"}},
+    {"name":"Claim enquiry","request":{"method":"PATCH","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/enquiries/{{enquiryId}}/claim"}},
+    {"name":"Get my enquiries","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],"url":"{{baseUrl}}/api/enquiries/my"}}
+  ]
+}
