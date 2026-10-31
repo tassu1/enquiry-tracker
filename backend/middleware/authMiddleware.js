@@ -6,7 +6,7 @@ async function protect(req, res, next) {
   try {
     const header = req.headers.authorization;
 
-    if (!header.startsWith("Bearer "))
+    if (!header || !header.startsWith("Bearer "))
        return res.status(401).json({
       success: false,
       message: "Authentication token is required" });
